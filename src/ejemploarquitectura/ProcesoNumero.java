@@ -14,13 +14,25 @@ public class ProcesoNumero extends Proceso {
 
     @Override
     protected void procesar(String dato) {
+        String[] valor = this.romper(dato);
+        this.validar(valor);
+    }
+    
+    private String[] romper(String dato){
         String[] listadoEntradas = dato.split(",");
-        if (listadoEntradas.length == 2) {
+        if(listadoEntradas.length == 2)
+            return listadoEntradas;
+        else
+            return null;
+    }
+    
+    private void validar(String[] listadoEntradas){
+        if (listadoEntradas != null ) {
             try {
                 int base, altura;
                 base = Integer.parseInt(listadoEntradas[0]);
                 altura = Integer.parseInt(listadoEntradas[1]);
-                System.out.println("El área es: " + String.valueOf(base * altura));
+                this.calcularArea(base,altura);
             } catch (NumberFormatException ex) {
                 System.err.println("Alguno de los argumentos no es numérico");
             }
@@ -28,4 +40,9 @@ public class ProcesoNumero extends Proceso {
             System.err.println("El numéro de argumentos no corresponde");
         }
     }
+    
+    private void calcularArea(int base, int altura){
+        System.out.println("El área es: " + String.valueOf(base * altura));
+    }
+            
 }
